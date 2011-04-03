@@ -32,6 +32,8 @@ ifeq ($(TARGET_DEVICE),captivate)
 	LOCAL_CFLAGS +=  -DCAPTIVATE
 endif
 
+LOCAL_C_INCLUDES := external/stlport/stlport bionic
+
 LOCAL_SRC_FILES := 						\
 				sensors.cpp 			\
 				SensorBase.cpp			\
@@ -40,7 +42,7 @@ LOCAL_SRC_FILES := 						\
 				BoschYamaha.cpp         \
 	            InputEventReader.cpp
 
-LOCAL_SHARED_LIBRARIES := liblog libcutils libdl
+LOCAL_SHARED_LIBRARIES := libutils liblog libcutils libdl
 LOCAL_PRELINK_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)

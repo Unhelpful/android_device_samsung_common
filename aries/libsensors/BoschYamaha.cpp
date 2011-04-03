@@ -46,7 +46,8 @@ BoschYamaha::BoschYamaha()
       //mEnabled(0),
       mPendingMask(0),
       mInputReaderMagnetic(4),
-      mInputReaderAccel(4)
+      mInputReaderAccel(4),
+      mBiasModel(0.7)
 {
 
     counterAccel = 0;
@@ -134,7 +135,6 @@ int BoschYamaha::enable(int32_t handle, int en)
     int newState  = en ? 1 : 0;
     int err = 0;
 
-	/*
 	//FIXME enabling the right sensor over sysfs interface
 	if(what == MagneticField){
 		what = Accelerometer; //Enable also Accel
@@ -164,7 +164,6 @@ int BoschYamaha::enable(int32_t handle, int en)
 			}
 		}
 	}
-	*/
 	
 	if(what == Accelerometer){
 		//Accelerometer
@@ -282,6 +281,7 @@ int BoschYamaha::readEvents(sensors_event_t* data, int count)
 					compassLastRead[0] = mPendingEvents[MagneticField].magnetic.x;
 					compassLastRead[1] = mPendingEvents[MagneticField].magnetic.y;
 					compassLastRead[2] = mPendingEvents[MagneticField].magnetic.z;	
+					mBiasModel.filterPoint(compassLastRead);
 					
 					*data++ = mPendingEvents[MagneticField];
 					count--;
