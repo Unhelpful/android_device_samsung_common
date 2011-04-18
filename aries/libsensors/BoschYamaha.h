@@ -76,7 +76,7 @@ private:
     int input_sysfs_path_len;
 	char input_accel_sysfs_path[PATH_MAX];
     int input_accel_sysfs_path_len;
-    BiasModel<float, 256> mBiasModel;
+    BiasModel<float, 64, 8> mBiasModel;
 	
 };
 

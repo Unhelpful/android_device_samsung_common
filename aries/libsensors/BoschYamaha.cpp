@@ -47,7 +47,7 @@ BoschYamaha::BoschYamaha()
       mPendingMask(0),
       mInputReaderMagnetic(4),
       mInputReaderAccel(4),
-      mBiasModel(0.7)
+      mBiasModel(0.05, 0.25, 1.0)
 {
 
     counterAccel = 0;
